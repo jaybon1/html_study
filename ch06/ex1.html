@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        function over(obj){
+            obj.src="media/banana.png";
+        }
+        function out(obj){
+            obj.src="media/apple.png";
+        }
+    </script>
+    <script src="ex1.js"></script>
+</head>
+<body>
+    <h3>자바스크립트 동작 위치</h3>
+    <!--
+        this : 내 자신을 가르키는 예약어(아래에서는 img 태그)
+        onmouseover 등은 이벤트로써 html과 js 코드경계가 애매하다.
+    -->
+
+    <!-- img 태그 내에서 사용하는 방식 -->
+    <img src="media/apple.png" alt="" 
+        onmouseover="this.src='media/banana.png'" 
+        onmouseout="this.src='media/apple.png'"><hr>
+
+    <!-- script 태그에서 함수를 미리 선언하는 방식 -->
+    <img src="media/apple.png" alt="" 
+        onmouseover="over(this)"
+        onmouseout="out(this)"><hr>
+
+    <!-- 외부의 js 파일을 가져와서 이용하는 방식 -->
+    <img src="media/apple.png" alt="" 
+        onmouseover="over2(this)"
+        onmouseout="out2(this)">
+</body>
+</html>

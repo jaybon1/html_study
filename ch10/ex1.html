@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function load(url){
+            // window = new window(); 와 같은 BOM 객체들이 미리 만들어져 있다
+            // 창 자체가 객체
+            window.open(url, "myWin", "left=300px, top=300px, width=400px, height=300px");
+        }
+    </script>
+</head>
+<body>
+    <h3>window.open()으로 새창 열기</h3><hr>
+    <a href="javascript:load('http://naver.com')">네이버</a><br>
+    <a href="javascript:load('http://kr.noxinfluencer.com')">유튜브 수입 계산</a><br>
+</body>
+</html>

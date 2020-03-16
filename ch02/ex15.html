@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>a 태그에 다운로드 속성(html5 지원)</h3>
+    <hr>
+    <ul>
+        <!-- 
+            서버가 아닌, 파일에서 링크를 클릭하면
+            다운로드 속성이더라도 다운로드가 되지않고 페이지가 열린다.
+            vscode를 사용한다면 live server 확장을 설치하여 실행해 본다.
+            해당 페이지에서 마우스 우클릭으로 open with live server 실행.
+        -->
+        <li><a href="media/Elvis.png" download="">엘비스 이미지 다운로드</a></li>
+        <li><a href="media/chapter9.pdf" download>chapter9.pdf 다운로드</a></li>
+        <li><a href="media/EmbraceableYou.mp3" download>EmbraceableYou.mp3 다운로드</a></li>
+        <li><a href="ex2.html" download>ex2.html 다운로드</a></li>
+        
+        <!--
+             브라우저에서 실행 가능한 파일은 바로 켜지고 
+             실행이 되지 않으면 download 속성이 없어도 바로 다운로드됨.
+             ex) hwp 파일은 실행되지 않아서 다운로드됨.
+        -->
+        <li><a href="media/test.hwp">test.hwp 다운로드</a></li>
+    </ul>
+</body>
+</html>

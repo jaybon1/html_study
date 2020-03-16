@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 함수 내의 document는 html의 body영역 -->
+    <script>
+        function check(){
+            alert("보이나요?");
+            f = document.frm;
+            if(f.id.value==""){
+                alert("아이디를 입력하세요.");
+                return;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h3>로그인 폼</h3>
+    <!-- 
+        선택창, 로그인창, 게시판 등도 모두 form 이다.
+        form, input에는 name 속성이 있어야한다. 
+    -->
+    <form name="frm" method="" action="">
+        <!-- 
+            input태그의 type의 기본 값은 text이다(생략가능)
+        -->
+        아이디: <input type="text" size="15" name="id"><br>
+        패스워드: <input type="password" size="15" name="pwd"><br>
+        <input type="submit" value="로그인" onclick="check()">
+    </form>
+</body>
+</html>

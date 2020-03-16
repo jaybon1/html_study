@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>제어문 -> 반복문 -> for문</h3><hr>
+    <script>
+        // 1에서 10까지 합을 구하시오.
+        var sum = 0;
+        for(var i = 1;  i < 11; i++){
+            sum = sum + i;
+        }
+        document.write("sum : " + sum);
+
+        document.write("<br>");
+
+        // 1에서 10까지 합을 구하시오. 식을 포함,
+        sum = 0;
+        for(var i = 1;  i < 11; i++){
+            sum += i;
+            if(i != 10){
+                document.write(i + " + ");
+            } else {
+                document.write(i + " = ");
+            }
+        }
+        document.write(sum);
+
+        document.write("<br>");
+
+        // 1~30 짝수의 합을 구하시오
+        sum = 0;
+        for(var i = 1;  i < 31; i++){
+            if(i % 2 == 0){
+                document.writeln(i);
+                sum += i;
+            }
+        }
+
+        document.write(sum);
+
+        document.write("<br>");
+
+        //1~20에서 3의 배수의 합을 식과 함께 출력하시오
+        sum = 0;
+        for(var i = 1;  i <= 20; i++){
+            if(i % 3 == 0){
+                if(i == 3)
+                    document.write(i);
+                else
+                    document.write(" + " + i);
+                sum += i;
+            }
+        }
+
+        document.write(" = " + sum);
+
+        document.write("<br>");
+
+        //1~20에서 3,6,9게임의 합을 식과 함께 출력하시오
+        sum = 0;
+        var f = 0;
+        for(var i = 1;  i <= 20; i++){
+            f = i % 10;
+            if(f % 3 == 0 && f != 0){
+                if(i == 3)
+                    document.write(i);
+                else
+                    document.write(" + " + i);
+                sum += i;
+            }
+        }
+
+        document.write(" = " + sum);
+
+        document.write("<br>");
+    </script>
+</body>
+</html>

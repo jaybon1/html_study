@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>하이퍼링크 만들기</h3>
+
+    <!--
+        href의 값은 "URL" / "URL#앵커이름 / "URL#앵커이름"
+        (앵커는 페이지 내의 id등의 위치)
+        target의 값은 "_blank" / "_self" / "_parent" / "_top"
+
+        target의 디폴트 값은 "_self"
+        target="_blank"는 새창에서 링크의 페이지 실행.
+    -->
+    <a href="http://naver.com" target="_blank">네이버</a><br>
+    <a href="http://google.com" target="_self">구글</a><br>
+
+    <!-- 
+        frame 태그에 적용 되는 target :
+
+        target="_parent"는 부모프레임에 오픈
+        target="_top" 전체화면에 오픈
+    -->
+    <a href="http://youtube.com" target="_parent">유튜브</a><br>
+    <a href="ex12.html" target="_top">ex12</a><br>
+    <a href="ex14.html" target="">ex14</a><br>
+    <a href="ex14.html#can" target="">ex14 #can</a><br>
+</body>
+</html>

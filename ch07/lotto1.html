@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function gugu(){
+            var test = document.getElementById("result");
+            var arr = new Array();
+            while(arr.length < 6){
+                r = Math.random() * 45;  // 0 ~ 0.999999... 의 난수 생성
+                inta =  Math.floor(r) + 1; //버림, 1~9사이의 난수
+                same = true;
+                for(j = 0; j < arr.length; j++){
+                    if (arr[j] == inta){
+                        same = false;
+                    }
+                }
+                if(same){
+                    arr[arr.length] = inta;
+                }
+            }
+            test.value = arr;
+        }
+    </script>
+</head>
+<body>
+    <h3>Math 객체 만들기</h3><hr>
+    <input type="button" onclick="gugu()" value="여기를 누르세요">
+    <input type="text" id="result">
+</body>
+</html>

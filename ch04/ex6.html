@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 콤마는 각각 적용 */
+        h3, li{color: brown;}
+        
+        /* 자손 : 태그의 하위 태그(와 그 모든 하위)를 선택하여 적용 */
+        ul strong {color: dodgerblue;}
+
+        /* 자식 : 태그의 하위 특정태그를 선택하여 적용 */
+        div > div > strong {background-color: yellow;} 
+        
+        body.main {
+            background: aliceblue;
+        }
+        
+        /* id속성을 가진 태그를 꾸미기 위해서는 아이디명에 #을 붙여서 적용 */
+        #list {background: mistyrose;} 
+
+        #list span {color: forestgreen;}
+
+        /* class속성을 가진 태그를 꾸미기 위해서는 클래스명에 .을 붙여서 적용 */
+        .warning {color: red;} 
+
+        /* 가상클래스를 이용하여 스타일 적용 가능(태그 뒤에 :(콜론)으로 구분)  */
+        h3:first-letter {color: red;} 
+        li:hover{background: yellowgreen;}
+    </style>
+</head>
+<body class="main">
+    <h3>Web Programming</h3>
+    <hr>
+    <div> 
+        <div>2학기 <strong>학습 내용</strong>입니다.</div>
+        <ul id="list">
+             <li><span>HTML5</span></li>
+            <li><strong>CSS</strong></li>
+            <li>JAVASCRIPT</li>
+        </ul>
+        <div class="warning">60점 이하는 F</div>
+    </div>
+</body>
+</html>

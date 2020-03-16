@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>if-else 학점 매기기</h3><br>
+    <script>
+        function test(){
+            var grade;
+            var score = prompt("홍길동님 점수를 입력하세요.",85); // 입력한 것이 숫자 일지라도 문자열타입이다.
+            score = parseInt(score); // 문자열이 숫자(정수)로 형변환 되는 함수
+            //document.write(score + 10);
+            if(score >= 90)
+                grade = "A";
+            else if(score >= 80)
+                grade = "B";
+            else if(score >= 70)
+                grade = "C";
+            else if(score >= 60)
+                grade = "D";
+            else
+                grade = "F";
+            document.write(score + "는" + grade +  "입니다.");
+        }
+    </script>
+    <input type="button" onclick="test()" value="여기를 누르세요">
+</body>
+</html>

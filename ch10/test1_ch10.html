@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>홀수 삼각형</h3><hr>
+    <form>
+        <input id="num" placeholder="1보다 큰 수를 입력하세요">
+        <input type="button" id="button" value="만들기" onclick="smagak()">
+    </form>
+    <script>
+        function smagak(){
+            num = document.getElementById("num");
+            val = parseInt(num.value);
+
+            for(i = 1; i <= val; i += 2){
+                a = val - i;
+                b = val - a;
+                c = a / 2;
+                document.write("<pre>");
+                for(j = 1; j <= c; j++) document.write(" ");
+                for(j = 1; j <= b; j++) document.write("*");
+                for(j = 1; j <= c; j++) document.write(" ");
+                document.write("</pre>");
+            }
+        }
+    </script>
+</body>
+</html>

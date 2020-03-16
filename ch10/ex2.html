@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        마우스를 이미지에 5초동안 올려두면 사이트로 이동 
+        이미지에서 마우스가 벗어나면 이동 타이머 중단
+    -->
+    <img id="img" src="https://i.imgur.com/wbkJgmd.gif"
+    onmouseover="startTimer(5000)"
+    onmouseout="cancelTimer()">
+    <script>
+        var timerID = null;
+        function startTimer(time){
+            // timerID : 시간
+            timerID = setTimeout("load('http://naver.com')" ,time);
+            document.getElementById("img").title = "타이머 작동 시작...";
+        }
+
+        function cancelTimer(){
+            if(timerID != null){
+                clearTimeout(timerID); // 타이머 중단
+            }
+        }
+
+        function load(url){
+            location.href = url; // 현재 윈도우가 url 사이트로 이동된다
+        }
+    </script>
+</body>
+</html>

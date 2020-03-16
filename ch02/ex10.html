@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>테이블 만들기</h3>
+    <!-- border는 테두리의 두께이다. 디폴트는 0 -->
+    <table border="1" bordercolor="red">
+        <caption>1학기 성적</caption>
+        <!-- tr은 하나의 행(가로줄의 개수)을 의미한다-->
+        <tr>
+            <!-- th는 하나의 열을 만들며, 기본적으로 볼드체이며 중앙정렬이다. -->
+            <th width="100">이름</th>
+            <th width="50">HTML</th>
+            <th width="50">CSS</th>
+        </tr>
+        <tr>
+            <!-- td는 하나의 열을 만든다. -->
+            <td>홍길동</td>
+            <td>100</td>
+            <td>75</td>
+        </tr>
+        <tr>
+            <td>홍길자</td>
+            <td>90</td>
+            <td>90</td>
+        </tr>
+    </table><hr>
+    <table border="1">
+        <caption>1학기 성적</caption>
+        <!-- thead는 제일 위에 들어감 -->
+        <thead>
+            <th width="100">이름</th>
+            <th width="50">HTML</th>
+            <th width="50">CSS</th>
+        </thead>
+        <tr>
+            <td>홍길동</td>
+            <td>100</td>
+            <td>75</td>
+        </tr>
+        <tr>
+            <td>홍길자</td>
+            <td>90</td>
+            <td>90</td>
+        </tr>
+        <!-- tfoot은 제일 위에 들어감 -->
+        <tfoot>
+            <tr>
+                <th>합</th><th>190</th><th>165</th>
+            </tr>
+        </tfoot>
+    </table><hr>
+    <table>
+        <caption>좋아하는 과일</caption>
+        <tbody>
+            <tr>
+                <td><img src="media/apple.png"></td>
+                <td><img src="media/banana.png"></td>
+                <td><img src="media/mango.png"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
