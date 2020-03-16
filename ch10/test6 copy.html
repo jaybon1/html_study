@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <title>내 단어장</title>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-1.11.0.min.js"></script>
+    <script>
+
+        var page = 0;
+        var part = 0;
+        var result = null;
+        var ran = 0;
+        var leng =0;
+        function openTextFile() {
+        var input = document.createElement("input");
+    
+            input.type = "file";
+            input.accept = "text/plain"; // 확장자가 xxx, yyy 일때, ".xxx, .yyy"
+        
+            input.onchange = function (event) {
+                processFile(event.target.files[0]);
+            
+            };
+            input.click();
+        }
+        
+        function processFile(file) {
+            var reader = new FileReader();
+        
+            reader.onload = function () {
+                raw = reader.result;
+                raw = raw.replace('raw="',"");
+                //raw = raw.replace('"+',"");
+                raw = raw.replace('";',"");
+
+                //document.getElementById("card").innerText = ra;
+                //raw = (ra).slice((ra.indexOf('raw=:"')+6));
+                result = [];
+                //document.getElementById("aa").value = raw;
+                raw1 = raw.split('&&&');
+                for(i = 0; i < raw1.length; i++){
+                    result[i] = raw1[i].split("^^^");
+                }
+                leng =0;
+                document.getElementById("card").innerText = "더블탭으로 단어장을 넘기세요";
+
+            };
+        
+            reader.readAsText(file, /* optional */ "utf-8");
+        }
+
+        function test(){
+            /*
+            $.getScript("C:/gisavoca/test.txt", function(){
+                result = [];
+                //document.getElementById("aa").value = raw;
+                raw1 = raw.split("&&&");
+                for(i = 0; i < raw1.length; i++){
+                    result[i] = raw1[i].split("^^^");
+                }
+            });*/
+            
+            leng = 1;
+            document.getElementById("card").innerText = "더블탭으로 단어장을 시작하세요";
+        }
+
+        function rand(){
+            if(document.getElementById("ran").value == "랜덤 보기"){
+                ran = 1;
+                page = 0;
+                part = 0;
+                document.getElementById("ran").value = "순차적으로 보기";
+            } else{
+                ran = 0;
+                page = 0;
+                part = 0;
+                document.getElementById("ran").value = "랜덤 보기";
+            }
+        }
+
+        function db(){
+            if(ran == 0){
+                if(part < 1 && page < result.length){
+                    if(result[page][part] == "fileend"){
+                        document.getElementById("card").innerHTML = "파일끝";
+                        page = 0;
+                        part = 0;
+                    } else{
+                        if(result[page][part].indexOf('"+') != -1){
+                            result1 = result[page][part].slice((result[page][part].indexOf('"+')+5), result[page][part].length);
+                        } else{
+                            result1 = result[page][part];
+                        }
+                        document.getElementById("card").innerHTML = (page+1) + "/" + (result.length-leng) + ".  Question" + "<br><hr>" + result1;
+                        part = 1;
+                    }
+                } else {
+                    if(page < result.length){
+                        if(result[page][part].indexOf('https://i.imgur.com') == -1){
+                            document.getElementById("card").innerHTML = (page+1) + "/" + (result.length-leng) + ".  Answer" + "<br><hr>" + result[page][part];
+                        } else {
+                            document.getElementById("card").innerHTML =  (page+1) + "/" + (result.length-leng) +".  Answer" + "<br><hr>" + "<img src='" + result[page][part] + "' width='100%'>";
+                        }
+                        page++;
+                    } else {
+                        document.getElementById("card").innerHTML = "파일끝";
+                        page = 0;
+                    }
+                    part = 0;
+                }
+            } else {
+                if(part < 1){
+                    if(result[page][part].indexOf('"+') != -1){
+                        result1 = result[page][part].slice((result[page][part].indexOf('"+')+5), result[page][part].length);
+                    } else{
+                        result1 = result[page][part];
+                    }
+                    document.getElementById("card").innerHTML = (page+1) + "/" + (result.length-leng) + ".  Question" + "<br><hr>" + result1;
+                    part++;
+                } else{
+                    if(result[page][part].indexOf('https://i.imgur.com') == -1){
+                        document.getElementById("card").innerHTML = (page+1) + "/" + (result.length-leng) + ".  Answer" + "<br><hr>" + result[page][part];
+                    } else {
+                        document.getElementById("card").innerHTML = (page+1) + "/" + (result.length-leng) + ".  Answer" + "<br><hr>" + "<img src='" + result[page][part] + "' width='100%'>";
+                    }
+                    r = Math.random() * (result.length);
+                    r = (r < 0)? 0 : r;
+                    page = Math.floor(r);
+                    part = 0;
+                }
+            }    
+        }
+    </script>
+    <style>
+        input {
+            width: 30%;
+            height: 50px;
+        }
+
+        #card {
+            font-size: 30px;
+            width: 100%;
+            height: 1000px;
+        }
+
+        #roading, #ran {
+            border: 0;
+            border-radius: 7px;
+            background-color: rgb(129, 177, 255);
+        }
+        
+    </style>
+</head>
+<body ondblclick="db()">
+<input id="roading" type="button" value="단어장 파일로딩" onclick="openTextFile()">
+<input id="roading" type="button" value="단어장 웹로딩" onclick="test()">
+<input id="ran" type="button" value="랜덤 보기" onclick="rand()">
+<br>
+<div id="card">단어장을 로딩하세요</div>
+<div id='output'>...</div>
+</body>
+</html>

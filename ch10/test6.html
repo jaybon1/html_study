@@ -13,15 +13,17 @@
         var ran = 0;
 
         function test(){
-            $.getScript("http://59.20.79.42/files/test.txt", function(){
+            $.getScript("https://raw.githubusercontent.com/jaybon1/gisavoca/master/test.js", function(){
+                
                 result = [];
                 //document.getElementById("aa").value = raw;
                 raw1 = raw.split("&&&");
                 for(i = 0; i < raw1.length; i++){
                     result[i] = raw1[i].split("^^^");
                 }
+                
             });
-            document.getElementById("card").innerText = "시작하려면 더블탭 하세요";
+            document.getElementById("card").innerText = raw;
         }
 
         function rand(){

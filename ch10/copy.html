@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<title>단어장더미복사</title>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+  <input id="code_html" type="text" value='"더미^^^더미1&&&"+' autocomplete="off" readonly="" >
+
+  <input type="button" value="복사"/><br>
+
+  <input id="code_direct" type="text" value="<br>" autocomplete="off" readonly="">
+
+  <input type="button" value="복사"/><br>
+
+  <input id="code_reddit" type="text" value="수육" autocomplete="off" readonly="">
+
+  <input type="button" value="복사"/><br>
+
+
+<script>
+
+document.addEventListener("click", function(e) {
+
+  var t = e.target;
+
+  var input = t.previousElementSibling;
+
+  input.select();  //문자열 전체 선택
+
+  document.execCommand("copy");  //복사
+
+  document.getSelection().removeAllRanges();  //선택 영역 해제
+
+  t.focus();  //input.select(); 때 옮겨진 포커스를 원래대로 돌린다
+
+});
+
+</script>
+
+</body>
+
+</html>
