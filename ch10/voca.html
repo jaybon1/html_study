@@ -67,7 +67,9 @@
         function rand(){
             if(document.getElementById("ran").value == "랜덤 보기"){
                 ran = 1;
-                page = 0;
+                r = Math.random() * (result.length);
+                r = (r < 0)? 0 : r;
+                page = Math.floor(r);
                 part = 0;
                 document.getElementById("ran").value = "순차적으로 보기";
             } else{
