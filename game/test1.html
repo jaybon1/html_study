@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Gamedev Canvas Workshop</title>
+    <style>
+    	* { padding: 0; margin: 0; }
+    	canvas { background: #eee; display: block; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="480" height="320"></canvas>
+
+<script>
+    // 캔버스 선택
+    var canvas = document.getElementById("myCanvas");
+    
+    // 2d 렌더링
+    var ctx = canvas.getContext("2d");
+
+    // 공 시작위치
+    var x = canvas.width/2;
+    var y = canvas.height-30;
+    
+    // 공 이동량
+    var dx = 2;
+    var dy = -2;
+
+    // 공 반지름 값
+    var ballRadius = 10;
+
+    // 공 그리기
+    function drawball(){
+        ctx.beginPath();
+        ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+    }
+
+
+    function draw() {
+
+    // 캔버스 비우기
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 캔버스에 공 그리기
+    drawball();
+
+    // 공 좌표 바꾸기
+    x += dx;
+    y += dy;
+    }
+    setInterval(draw, 10);
+
+</script>
+
+</body>
+</html>

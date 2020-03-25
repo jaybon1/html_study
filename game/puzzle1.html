@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+</style>
+<script>
+    var count = 0;
+        function ran(){
+        document.getElementById("count").innerHTML = "움직인 횟수 : " + (count);
+        var arr = new Array();
+        while(arr.length < 9){
+            var tf = true;
+            var r = Math.random() * 9;
+            r = Math.floor(r);
+            for(i=0; i<arr.length; i++){
+                if(arr[i] == r){
+                    tf = false;
+                }
+            }
+            if(tf==true){
+                arr.push(r);
+            }
+        }
+        for (var i = 1; i < 10; i++) {
+            document.getElementById("i"+i).innerHTML = arr[i-1];
+            if(arr[i-1] == 0){
+                document.getElementById("i"+i).innerHTML = "&nbsp";
+                document.getElementById("i"+i).className = "grid-item empty";
+            }
+        }
+    }
+
+    function change(yoso){
+        var a = yoso.id[1];
+        var b = document.getElementsByClassName("empty")[0].id[1];
+
+        if(parseInt(a) == parseInt(b) + 3 ||
+        parseInt(a) == parseInt(b) - 3 ||
+        parseInt(a) == parseInt(b) + 1 ||
+        parseInt(a) == parseInt(b) - 1) {
+            
+            document.getElementsByClassName("empty")[0].innerHTML = yoso.innerHTML;
+            document.getElementsByClassName("empty")[0].className = "grid-item";
+            yoso.innerHTML = "&nbsp";
+            yoso.className = "grid-item empty";
+            count = count + 1;
+            document.getElementById("count").innerHTML = "움직인 횟수 : " + (count);
+            var win = 1;
+            for(i=1;i<9;i++){
+                if(parseInt(document.getElementById("i"+i).innerHTML) != i){
+                    win = 0;
+                }
+            }
+            if(win == 1){
+                document.getElementsByClassName("empty")[0].className = "grid-item";
+                document.getElementById("win").innerHTML = "퍼즐 성공!! 재시작 : 새로고침";
+            }
+        }
+    }
+</script>
+</head>
+<body onload="ran()">
+
+<h1>퍼즐</h1>
+<h2 id="count"></h2>
+<div class="grid-container">
+  <div id="i1" class="grid-item" onclick="change(this)"></div>
+  <div id="i2" class="grid-item" onclick="change(this)"></div>
+  <div id="i3" class="grid-item" onclick="change(this)"></div>  
+  <div id="i4" class="grid-item" onclick="change(this)"></div>
+  <div id="i5" class="grid-item" onclick="change(this)"></div>
+  <div id="i6" class="grid-item" onclick="change(this)"></div>  
+  <div id="i7" class="grid-item" onclick="change(this)"></div>
+  <div id="i8" class="grid-item" onclick="change(this)"></div>
+  <div id="i9" class="grid-item" onclick="change(this)"></div>
+</div>
+<h2 id="win"></h2>
+
+</body>
+</html>
+
