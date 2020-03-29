@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        canvas {
+            background: #eee;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>게임1</h1>
+    <h3 id="level">난이도: 0</h3>
+    <h3 id="kill">킬수 : 0</h3>
+    <h3 id="live">생명 : 0</h3>
+    <canvas id="canvas" width="480" height="360"></canvas>
+    <script>
+        alert("게임시작");
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+
+        // 이미지 객체 생성 및 주소 가져오기
+        const image = new Image();
+        image.src = 'shot.png';
+
+        // 모덴군 이미지
+        const modensImage = new Image();
+        modensImage.src = 'zako01_out(1).png';
+
+
+        // 좌우 뱡향키 및 x공격키
+        var rightPressed = false;
+        var leftPressed = false;
+        var xPressed = false;
+        var xUp = true;
+
+
+        // 캐릭터 생성 좌표
+        var manX = 0;
+        var manY = canvas.height - 38;
+
+
+        // 총알크기
+        var bulletRadius = 5;
+
+        // 총알 배열
+        var bullets = new Array();
+
+        // 모덴군 배열
+        var modens = new Array();
+
+        // 난이도
+        var level = 1;
+
+        // 킬수
+        var kill = 0;
+
+        // 생명
+        var live = 10;
+
+
+        // 키누름 감지 메서드
+        function keyDownHandler(e) {
+
+            //방향키
+            if (e.keyCode == 39) {
+                rightPressed = true;
+            } else if (e.keyCode == 37) {
+                leftPressed = true;
+            }
+
+            // x키(x키는 연사가 아니기 때문에 키를 떼고 다시 눌러야한다)
+            if (e.keyCode == 88 && xUp == true) {
+                xPressed = true;
+                xUp = false;
+            }
+        }
+
+        // 키뗌 감지 메서드
+        function keyUpHandler(e) {
+
+            // 방향키
+            if (e.keyCode == 39) {
+                rightPressed = false;
+            } else if (e.keyCode == 37) {
+                leftPressed = false;
+            }
+
+            // x키(x키는 연사가 아니기 때문에 키를 떼고 다시 눌러야한다)
+            if (e.keyCode == 88) {
+                xUp = true;
+            }
+        }
+
+
+        // 키입력 감지 html에 추가
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+
+        // 캐릭터 그리기 메서드
+        function drawImage(image) {
+            ctx.drawImage(image, manX, manY, image.width, image.height);
+        }
+
+        // 새 총알 생성 메서드
+        function newBullet() {
+            var r = Math.random() * 9;
+            r = Math.floor(r) + 5;
+            bullets[bullets.length] = {
+                x: manX + 50,
+                y: manY + r,
+                status: 1
+            };
+            xPressed = false;
+        }
+
+        // 총알 그리기 메서드
+        function drawBullet() {
+            for (let i = 0; i < bullets.length; i++) {
+                ctx.beginPath();
+                ctx.arc(bullets[i].x, bullets[i].y, bulletRadius, 0, Math.PI * 2);
+                ctx.fillStyle = "#0095DD";
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
+        //모덴군 생성 메서드
+        function newModen() {
+            var r = Math.random() * 100;
+            r = Math.floor(r);
+            if (r < level) {
+                modens[modens.length] = {
+                    x: canvas.width - modensImage.width,
+                    y: canvas.height - modensImage.height,
+                };
+            }
+        }
+
+
+        // 모덴군 그리기 메서드
+        function drawModens(image) {
+            for (let i = 0; i < modens.length; i++) {
+                ctx.drawImage(image, modens[i].x, modens[i].y, image.width, image.height);
+            }
+        }
+
+
+        // 메인
+        function draw() {
+            document.getElementById("kill").innerHTML = "킬수 : " + kill;
+            document.getElementById("live").innerHTML = "생명 : " + live;
+            document.getElementById("level").innerHTML = "난이도 : " + level;
+            if (live <= 0) {
+                alert("게임오버");
+                bullets.splice(0, bullets.length);
+                modens.splice(0, modens.length);
+                level = 1;
+                kill = 0;
+                live = 10;
+                document.getElementById("kill").innerHTML = "킬수 : " + kill;
+                document.getElementById("live").innerHTML = "생명 : " + live;
+                document.getElementById("level").innerHTML = "난이도 : " + level;
+                manX = 0;
+                manY = canvas.height - 38;
+            }
+
+            // 화면 클리어
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 캐릭터 그리기
+            drawImage(image);
+
+
+            // 방향키 누르면 캐릭터 x좌표 증감
+            if (rightPressed && manX < canvas.width - image.width) {
+                manX += 3;
+            } else if (leftPressed && manX > 0) {
+                manX -= 3;
+            }
+
+            // x누를시 총알 생성
+            if (xPressed) {
+                newBullet();
+            }
+
+            // 총알들 그리기
+            drawBullet();
+
+            // 모덴군 생성
+            newModen();
+
+            // 모덴군 그리기
+            drawModens(modensImage);
+
+
+            // 총알들 x좌표 늘리기
+            for (let i = 0; i < bullets.length; i++) {
+                bullets[i].x += 5;
+            }
+
+            // 모덴군 이동
+            for (let i = 0; i < modens.length; i++) {
+                modens[i].x -= 2;
+            }
+
+            // 모덴군 맞은 총알, 총알 맞은 모덴군 제거
+            for (let j = modens.length - 1; j >= 0; j--) {
+                for (let i = bullets.length - 1; i >= 0; i--) {
+                    if (bullets[i].x >= modens[j].x - 5 && bullets[i].x < modens[j].x + 5) {
+                        bullets.splice(i, 1);
+                        modens.splice(j, 1);
+                        i--;
+                        j--;
+                        kill++;
+                    }
+                }
+            }
+
+            // 캐릭과 만난 모덴군 제거, 생명 감소
+            for (let j = modens.length - 1; j >= 0; j--) {
+                if (manX >= modens[j].x) {
+                    modens.splice(j, 1);
+                    live--;
+                }
+            }
+
+            // 화면밖으로 나간 총알들 제거
+            for (let i = bullets.length - 1; i >= 0; i--) {
+                if (bullets[i].x > canvas.width + 100) {
+                    bullets.splice(i, 1);
+                }
+            }
+
+            // 킬수비례해서 난이도 올리기
+            if (kill / level == 10) {
+                level++;
+            }
+        }
+        setInterval(draw, 10);
+    </script>
+</body>
+
+</html>
